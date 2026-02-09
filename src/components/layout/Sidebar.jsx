@@ -1,6 +1,23 @@
 "use client";
 
+import { useRouter, usePathname } from "next/navigation";
+
 export default function Sidebar({ isOpen, setIsOpen }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const menu = [
+    { name: "Dashboard", path: "/" },
+    { name: "Users", path: "/users" },
+    { name: "Orders", path: "/orders" },
+    { name: "Settings", path: "/settings" },
+  ];
+
+  const handleClick = (path) => {
+    router.push(path);
+    setIsOpen(false); // close sidebar on mobile
+  };
+
   return (
     <>
       <aside
@@ -11,12 +28,31 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           md:translate-x-0 md:static md:block
         `}
       >
-        <div className="p-6 font-bold text-xl hidden md:block">AppifyDevs</div>
-        <nav className="px-4 space-y-3 mt-6">
-          <p className="text-blue-600 font-medium cursor-pointer">Dashboard</p>
-          <p className="text-gray-500 cursor-pointer">Users</p>
-          <p className="text-gray-500 cursor-pointer">Orders</p>
-          <p className="text-gray-500 cursor-pointer">Settings</p>
+        <div className="p-6 font-bold text-xl hidden md:block">
+          AppifyDevs
+        </div>
+
+        <nav className="px-4 space-y-2 mt-6">
+          {menu.map((item) => {
+            const isActive = pathname === item.path;
+
+            return (
+              <p
+                key={item.path}
+                onClick={() => handleClick(item.path)}
+                className={`
+                  px-4 py-2 rounded-md cursor-pointer font-medium transition
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-600"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }
+                `}
+              >
+                {item.name}
+              </p>
+            );
+          })}
         </nav>
       </aside>
 
@@ -25,7 +61,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <div
           onClick={() => setIsOpen(false)}
           className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
-        ></div>
+        />
       )}
     </>
   );
