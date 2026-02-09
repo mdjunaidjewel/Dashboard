@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Admin Analytics Dashboard
 
-## Getting Started
+A **responsive, production-ready Admin Analytics Dashboard** built with **Next.js** and **React**, designed to visualize business data using charts and reusable UI components.  
 
-First, run the development server:
+Live Demo: [https://dashboards121.netlify.app/](https://dashboards121.netlify.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Project Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project is a modern Admin Dashboard that allows users to visualize key business metrics, including:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Total Revenue**
+- **Total Users**
+- **Orders**
+- **Conversion Rate**
+- Revenue & Orders charts
+- User Distribution pie chart
 
-## Learn More
+It features **reusable UI components**, **dynamic charts**, and **skeleton loading states** for better user experience.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend Framework:** Next.js (React-based)
+- **Language:** JavaScript
+- **Charts:** Recharts
+- **Styling:** Tailwind CSS
+- **State Management:** Zustand (for filter & KPI state)
+- **Skeleton/Loading:** Custom skeleton components
+- **Deployment:** Netlify
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📐 Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. Layout Structure
+- Responsive sidebar (collapsible on tablet & mobile)
+- Top header with notification and user profile
+- Main content area with KPI cards and charts
+
+### 2. Dashboard Overview
+- **4 KPI cards** with dynamic values, percentage change, and positive/negative indicators
+- Responsive grid layout
+
+### 3. Charts Section
+- **Revenue Over Time** (Line Chart)
+- **Orders Per Month** (Bar Chart)
+- **User Distribution** (Pie Chart)
+- Responsive and interactive tooltips
+
+### 4. Filters & Interactions
+- Date range selector: Last 7 days, Last 30 days, Last 12 months
+- Filter updates KPI and chart data dynamically
+- Skeleton loading while fetching data
+
+### 5. Modern UI
+- Tailwind CSS based styling
+- Smooth hover effects and shadows
+- Fully responsive for mobile, tablet, and desktop
+
+---
