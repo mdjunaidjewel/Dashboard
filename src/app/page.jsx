@@ -79,8 +79,7 @@ export default function Home() {
               <KPICard title="Total Users" value={totalUsers} change={usersChange} />
               <KPICard title="Orders" value={totalOrders} change={ordersChange} />
               <KPICard title="Conversion Rate" value={`${conversionRate}%`} change={conversionChange} />
-            </>}
-      </div>
+            </>}      </div>
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
