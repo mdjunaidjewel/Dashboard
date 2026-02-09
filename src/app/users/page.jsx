@@ -16,7 +16,7 @@ export default function UsersPage() {
     const timer = setTimeout(() => {
       setUsers(userDistribution);
       setLoading(false);
-    }, 1000);
+    }, 1000); // simulate API delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -28,23 +28,22 @@ export default function UsersPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Users Overview</h1>
-        <p className="text-gray-500 mt-1">
-          Distribution of users by category
-        </p>
+        <p className="text-gray-500 mt-1">Distribution of users by category</p>
       </div>
 
       {loading ? (
-        <ChartSkeleton height={320} />
+        <div className="space-y-6">
+          <ChartSkeleton height={320} />
+          <ChartSkeleton height={320} />
+        </div>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* Pie Chart Card */}
           <div className="bg-white rounded-2xl shadow p-6">
-            <h2 className="text-lg font-semibold mb-6">
-              User Distribution
-            </h2>
+            <h2 className="text-lg font-semibold mb-6">User Distribution</h2>
 
-            <div className="relative w-full h-72">
-              <ResponsiveContainer>
+            <div className="relative w-full h-72 min-h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={users}
@@ -54,15 +53,20 @@ export default function UsersPage() {
                     cy="50%"
                     innerRadius={60}
                     outerRadius={100}
+                    label
                   >
                     {users.map((_, index) => (
-                      <Cell
-                        key={index}
-                        fill={COLORS[index % COLORS.length]}
-                      />
+                      <Cell key={index} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#ffffff",
+                      border: "1px solid #E5E7EB",
+                      borderRadius: 8,
+                      fontSize: 12,
+                    }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
 
@@ -76,14 +80,11 @@ export default function UsersPage() {
             {/* Legend */}
             <div className="mt-6 space-y-2">
               {users.map((u, i) => (
-                <div
-                  key={u.name}
-                  className="flex items-center justify-between text-sm"
-                >
+                <div key={u.name} className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <span
                       className="w-3 h-3 rounded-full"
-                      style={{ backgroundColor: COLORS[i] }}
+                      style={{ backgroundColor: COLORS[i % COLORS.length] }}
                     />
                     <span className="text-gray-600">{u.name}</span>
                   </div>
@@ -95,9 +96,7 @@ export default function UsersPage() {
 
           {/* Table Card */}
           <div className="bg-white rounded-2xl shadow p-6">
-            <h2 className="text-lg font-semibold mb-6">
-              User Breakdown
-            </h2>
+            <h2 className="text-lg font-semibold mb-6">User Breakdown</h2>
 
             <div className="overflow-hidden rounded-xl border">
               <table className="w-full text-sm">
@@ -109,16 +108,9 @@ export default function UsersPage() {
                 </thead>
                 <tbody>
                   {users.map((u) => (
-                    <tr
-                      key={u.name}
-                      className="border-t hover:bg-gray-50 transition"
-                    >
-                      <td className="px-4 py-3 font-medium">
-                        {u.name}
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        {u.value}
-                      </td>
+                    <tr key={u.name} className="border-t hover:bg-gray-50 transition">
+                      <td className="px-4 py-3 font-medium">{u.name}</td>
+                      <td className="px-4 py-3 text-right">{u.value}</td>
                     </tr>
                   ))}
                 </tbody>
