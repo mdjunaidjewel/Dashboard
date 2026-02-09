@@ -1,21 +1,41 @@
 "use client";
 
 import React from "react";
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { revenueData } from "../data/mockData";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
-const RevenueBarChart = () => {
+export default function RevenueChart({ data }) {
   return (
-    <div style={{ width: "100%", height: 300 }}>
-      <ResponsiveContainer>
-        <BarChart data={revenueData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-          <XAxis dataKey="month" />
-          <Tooltip />
-          <Bar dataKey="value" fill="#82ca9d" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+        <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+        <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#4B5563" }} />
+        <YAxis tick={{ fontSize: 12, fill: "#4B5563" }} />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: "#ffffff",
+            border: "1px solid #E5E7EB",
+            borderRadius: 8,
+            fontSize: 12,
+          }}
+        />
+        <Line
+          type="monotone"
+          dataKey="value"
+          stroke="#4F46E5"
+          strokeWidth={3}
+          dot={{ r: 4 }}
+          activeDot={{ r: 6 }}
+          animationDuration={800}
+        />
+      </LineChart>
+    </ResponsiveContainer>
   );
-};
-
-export default RevenueBarChart;
+}

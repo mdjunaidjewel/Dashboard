@@ -1,21 +1,25 @@
-"use client"; // Only needed in Next.js 13+ with app directory
+"use client";
 
 import React from "react";
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { ordersData } from "../data/mockData"; // Make sure this path is correct
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
-const OrdersBarChart = () => {
+export default function OrdersChart({ data }) {
   return (
-    <div style={{ width: "100%", height: 300 }}>
-      <ResponsiveContainer>
-        <BarChart data={ordersData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-          <XAxis dataKey="name" />
-          <Tooltip />
-          <Bar dataKey="orders" fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+        <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
+        <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#4B5563" }} />
+        <YAxis tick={{ fontSize: 12, fill: "#4B5563" }} />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: "#ffffff",
+            border: "1px solid #E5E7EB",
+            borderRadius: 8,
+            fontSize: 12,
+          }}
+        />
+        <Bar dataKey="orders" fill="#4F46E5" radius={[6, 6, 0, 0]} barSize={20} animationDuration={800} />
+      </BarChart>
+    </ResponsiveContainer>
   );
-};
-
-export default OrdersBarChart;
+}
